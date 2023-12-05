@@ -1,6 +1,9 @@
 {
   "name": "test-electron-builder",
   "version": "0.1.0",
+  "author": {
+    "name": "argusherd"
+  },
   "private": true,
   "main": "main/index.js",
   "scripts": {
@@ -40,9 +43,23 @@
   },
   "build": {
     "asar": true,
+    "icon": "icon.png",
     "files": [
       "main",
       "renderer/out"
-    ]
+    ],
+    "win": {
+      "target": [
+        "msi",
+        "nsis",
+        "zip",
+        "portable"
+      ],
+      "verifyUpdateCodeSignature": false
+    },
+    "nsis": {
+      "oneClick": false,
+      "perMachine": false
+    }
   }
 }
