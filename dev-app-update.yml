@@ -1,0 +1,4 @@
+provider: github
+owner: argusherd
+repo: test-electron-builder
+updaterCacheDirName: test-electron-builder-updater
