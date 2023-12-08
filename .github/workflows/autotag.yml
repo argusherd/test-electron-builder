@@ -23,5 +23,5 @@ jobs:
       - name: Install dependencies
         run: npm install
 
-      - name: Run releas-it
-        run: npx releas-it --ci
+      - name: Run release-it
+        run: npx release-it --ci
