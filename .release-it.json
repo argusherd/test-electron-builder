@@ -20,5 +20,8 @@
         { "type": "test", "hidden": true }
       ]
     }
+  },
+  "npm": {
+    "publish": false
   }
 }
