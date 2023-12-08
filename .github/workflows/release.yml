@@ -1,13 +1,14 @@
-name: Build
+name: Release
 
 permissions:
   contents: write
 
 on:
-  push:
-    tags:
-      - "v*.*.*"
-  workflow_dispatch:
+  pull_request:
+    types:
+      - closed
+    branches:
+      - "master"
 
 jobs:
   release:
@@ -23,6 +24,11 @@ jobs:
     steps:
       - name: Check out git repository
         uses: actions/checkout@v3.0.0
+
+      - name: Set up git config
+        run: |
+          git config user.name "${GITHUB_ACTOR}"
+          git config user.email "${GITHUB_ACTOR}@users.noreply.github.com"
 
       - name: Install Node.js
         uses: actions/setup-node@v4
@@ -47,21 +53,13 @@ jobs:
         run: |
           npx rimraf "dist/!(*.dmg)"
 
-      - name: Upload artifacts
-        uses: actions/upload-artifact@v3
-        with:
-          name: ${{ matrix.os }}
-          path: dist
+      # - name: Upload artifacts
+      #   uses: actions/upload-artifact@v3
+      #   with:
+      #     name: ${{ matrix.os }}
+      #     path: dist
 
-      - name: Release
-        uses: softprops/action-gh-release@v1
-        with:
-          files: "dist/*"
-          draft: false
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-
-      - name: Delete drafts
-        uses: hugo19941994/delete-draft-releases@v1.0.0
+      - name: Run release-it
+        run: npx release-it --ci
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
