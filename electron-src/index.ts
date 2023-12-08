@@ -73,10 +73,6 @@ autoUpdater.on("error", (error) => {
   dialog.showErrorBox("There is an error while updating", error.message);
 });
 
-autoUpdater.on("download-progress", (progress) => {
-  console.log(progress);
-});
-
 autoUpdater.on("update-downloaded", () => {
   dialog
     .showMessageBox({
