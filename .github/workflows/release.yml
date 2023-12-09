@@ -10,6 +10,7 @@ on:
 
 jobs:
   release:
+    if: "!contains(github.event.head_commit.message, 'chore: release')"
     name: Build and release electron app
     runs-on: ${{ matrix.os }}
 
@@ -22,6 +23,8 @@ jobs:
     steps:
       - name: Check out git repository
         uses: actions/checkout@v3.0.0
+        with:
+          fetch-depth: 0
 
       - name: Set up git config
         run: |
