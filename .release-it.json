@@ -26,6 +26,6 @@
   },
   "github": {
     "release": true,
-    "assets": ["dist/*"]
+    "draft": true
   }
 }

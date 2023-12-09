@@ -5,10 +5,8 @@ permissions:
 
 on:
   pull_request:
-    types:
-      - closed
     branches:
-      - "master"
+      - 'release**'
 
 jobs:
   release:
@@ -38,6 +36,11 @@ jobs:
       - name: Install dependencies
         run: npm install
 
+      - name: Bump version and prepare release
+        run: npx release-it --ci
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
       - name: Build electron App
         run: npm run dist
         env:
@@ -53,13 +56,7 @@ jobs:
         run: |
           npx rimraf "dist/!(*.dmg)"
 
-      # - name: Upload artifacts
-      #   uses: actions/upload-artifact@v3
-      #   with:
-      #     name: ${{ matrix.os }}
-      #     path: dist
-
-      - name: Run release-it
-        run: npx release-it --ci
+      - name: Release
+        run: npx release-it --ci --no-increment --no-git --github.update --github.assets=dist/** --no-github.draft
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
