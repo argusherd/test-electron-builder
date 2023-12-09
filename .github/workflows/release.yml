@@ -4,7 +4,7 @@ permissions:
   contents: write
 
 on:
-  pull_request_target:
+  pull_request:
     types:
       - opened
       - reopened
@@ -25,7 +25,6 @@ jobs:
       - name: Check out git repository
         uses: actions/checkout@v3.0.0
         with:
-          ref: ${{ github.head_ref }}
           fetch-depth: 0
 
       - name: Set up git config
