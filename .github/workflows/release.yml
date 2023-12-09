@@ -8,8 +8,7 @@ on:
     types:
       - opened
     branches:
-      - 'release**'
-
+      - 'master'
 jobs:
   release:
     name: Build and release electron app
