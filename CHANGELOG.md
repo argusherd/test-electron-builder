@@ -1,5 +1,7 @@
 # Changelog
 
+## 0.2.2 (2023-12-09)
+
 ## 0.2.1 (2023-12-09)
 
 # [0.2.0](https://github.com/argusherd/test-electron-builder/compare/v0.1.8...v0.2.0) (2023-12-08)
